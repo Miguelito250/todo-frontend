@@ -3,6 +3,15 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "src/",
+    "paths": {
+      "@shared/constants/*": ["./app/shared/constants/*"],
+      "@shared/interfaces/*": ["./app/shared/interfaces/*"],
+      "@shared/components/*": ["./app/shared/components/*"],
+      "@shared/services/*": ["./app/shared/services/*"],
+      "@shared/types/*": ["./app/shared/types/*"],
+      "@utils/regex/*": ["./app/utils/regex/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,

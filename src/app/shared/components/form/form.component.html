@@ -1,0 +1,63 @@
+<form [class]="classParent" (ngSubmit)="emitSubmit()" [formGroup]="form">
+  @for (input of inputs; track $index) {
+  <div [class]="input.width">
+    <label [for]="input.name" class="sr-only">{{ input.label }}</label>
+    @if (input.type === "select") {
+    <select
+      [name]="input.name"
+      [id]="input.id"
+      class="color__placeholder"
+      [formControlName]="input.name"
+    >
+      @for (option of input.optionsSelect; track $index) {
+      <option
+        [selected]="option.default"
+        [value]="option.tagValue"
+        [disabled]="option.disabled"
+        [hidden]="option.showOption === null || option.showOption === false"
+      >
+        {{ option.valueToShow }}
+      </option>
+      }
+    </select>
+    @for (error of getErrorMessages(input.name); track $index) {
+    <small>{{ error }}</small>
+    } } @else if (input.type === "textarea") {
+    <textarea
+      [name]="input.name"
+      [id]="input.id"
+      [class]="input.width"
+      [formControlName]="input.name"
+    ></textarea>
+    @for (error of getErrorMessages(input.name); track $index) {
+    <small>{{ error }}</small>
+    } } @else {
+    <input
+      [readOnly]="input.readonly"
+      [id]="input.name"
+      [type]="input.type"
+      [value]="input.value"
+      [placeholder]="input.placeholder"
+      [name]="input.name"
+      [formControlName]="input.name"
+    />
+    <div class="flex flex-col">
+      @for (error of getErrorMessages(input.name); track $index) {
+      <small>{{ error }}</small>
+      }
+    </div>
+    }
+  </div>
+  } @for (button of configActionsButtons; track $index) {
+  <div [class]="button.width">
+    <button
+      [type]="button.type"
+      [class]="button.action"
+      class="action"
+      [disabled]="!form.valid"
+    >
+      {{ button.textToShow }}
+    </button>
+  </div>
+  }
+</form>

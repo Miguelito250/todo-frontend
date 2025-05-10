@@ -4,19 +4,23 @@
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
-        Inicia Sesión en tu Cuenta 
+        Crea tu cuenta
       </h2>
       <p class="mt-2 text-center text-sm text-gray-400">
         O
         <a
-          routerLink="/auth/register"
+          routerLink="/login"
           class="font-medium text-indigo-400 hover:text-indigo-300"
         >
-          crea una nueva cuenta
+          Inicia Sesión con una cuenta existente
         </a>
       </p>
     </div>
 
-    <app-form class="mt-8 space-y-6" [configActionsButtons]="buttonsActions" [inputs]="loginInputs" (formValues)="onSubmit($event )"></app-form>
+    <app-form
+      [inputs]="registerInputs"
+      [configActionsButtons]="buttonsActions"
+      (formValues)="onSubmit($event)"
+    ></app-form>
   </div>
 </div>
