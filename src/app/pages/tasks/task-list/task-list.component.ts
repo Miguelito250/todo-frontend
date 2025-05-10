@@ -2,7 +2,7 @@ import { Component, type OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { RouterLink } from "@angular/router"
 import { FormsModule } from "@angular/forms"
-import type { Task } from "../../../models/task.model"
+import type { Task } from "@models/task.model"
 
 @Component({
   selector: "app-task-list",

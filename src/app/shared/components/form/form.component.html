@@ -1,7 +1,7 @@
 <form [class]="classParent" (ngSubmit)="emitSubmit()" [formGroup]="form">
   @for (input of inputs; track $index) {
   <div [class]="input.width">
-    <label [for]="input.name" class="sr-only">{{ input.label }}</label>
+    <label [for]="input.name" [class]="!input.labelClass ? 'sr-only' : input.labelClass ">{{ input.label }}</label>
     @if (input.type === "select") {
     <select
       [name]="input.name"
@@ -28,6 +28,7 @@
       [id]="input.id"
       [class]="input.width"
       [formControlName]="input.name"
+      [placeholder]="input.placeholder"
     ></textarea>
     @for (error of getErrorMessages(input.name); track $index) {
     <small>{{ error }}</small>
@@ -55,6 +56,7 @@
       [class]="button.action"
       class="action"
       [disabled]="!form.valid"
+      (click)="button.action === 'action-cancel' ? cancelAction.emit() : null"
     >
       {{ button.textToShow }}
     </button>

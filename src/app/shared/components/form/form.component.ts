@@ -1,8 +1,10 @@
 import {
   Component,
+  EventEmitter,
   inject,
   Input,
   OnInit,
+  Output,
   output,
   OutputEmitterRef,
 } from '@angular/core';
@@ -28,6 +30,9 @@ export class FormComponent implements OnInit {
   @Input() public classParent: string;
   @Input() public inputs: IOptionsInput[];
   @Input() public configActionsButtons: IConfigActionButtons[];
+
+  @Output() cancelAction = new EventEmitter<void>();
+
 
   public formValues: OutputEmitterRef<FormGroup> = output<FormGroup>();
 

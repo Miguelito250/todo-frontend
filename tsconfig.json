@@ -10,7 +10,8 @@
       "@shared/components/*": ["./app/shared/components/*"],
       "@shared/services/*": ["./app/shared/services/*"],
       "@shared/types/*": ["./app/shared/types/*"],
-      "@utils/regex/*": ["./app/utils/regex/*"]
+      "@utils/regex/*": ["./app/utils/regex/*"],
+      "@models/*": ["./app/models/*"]
     },
     "outDir": "./dist/out-tsc",
     "strict": true,

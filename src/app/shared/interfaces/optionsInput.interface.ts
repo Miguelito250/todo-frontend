@@ -7,12 +7,13 @@ export interface IOptionsInput {
   label: string;
   placeholder: string;
   type: string;
-  value: string;
+  value: string | number | Date;
   name: string;
   optionsSelect?: IOptionsOfSelect[];
   readonly: boolean;
   validator?: ValidatorFn[];
   listenOtherControls?: listenOtherControl;
+  labelClass?: string,
 }
 
 export interface listenOtherControl{
