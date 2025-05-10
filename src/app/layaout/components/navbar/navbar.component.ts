@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, Input, WritableSignal } from "@angular/core"
 import { CommonModule } from "@angular/common"
 
 @Component({
@@ -8,13 +8,9 @@ import { CommonModule } from "@angular/common"
   templateUrl: "./navbar.component.html",
 })
 export class NavbarComponent {
-  isUserMenuOpen = false
+  @Input() toggleSidebar!: () => void;
 
-  toggleUserMenu() {
-    this.isUserMenuOpen = !this.isUserMenuOpen
-  }
-
-  getUserInitials(): string {
+  public getUserInitials(): string {
     return "JD"
   }
 }
