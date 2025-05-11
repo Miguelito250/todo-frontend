@@ -14,7 +14,9 @@ export class RecentTaskComponent {
   constructor() {
     this.recentTasks = [];
   }
-  formatDate(date: Date): string {
+  
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
     return date.toLocaleDateString();
   }
 }
