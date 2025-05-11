@@ -1,11 +1,6 @@
 import { Component, inject, type OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormBuilder,
-  type FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { type FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import type { Task } from '@models/task.model';
 import { FormComponent } from '../../../shared/components/form/form.component';
@@ -15,6 +10,7 @@ import {
   CREATE_INPUTS,
 } from '@shared/constants/forms/tasks/createInputs';
 import { IConfigActionButtons } from '@shared/interfaces/configActionButtons.interface';
+import { TasksService } from '../services/tasks/tasks.service';
 
 @Component({
   selector: 'app-task-form',
@@ -23,31 +19,18 @@ import { IConfigActionButtons } from '@shared/interfaces/configActionButtons.int
   templateUrl: './task-form-component.html',
 })
 export class TaskFormComponent implements OnInit {
+  private _taskService = inject(TasksService);
   private _router = inject(Router);
   private _route = inject(ActivatedRoute);
 
   public createInputs: IOptionsInput[];
   public buttonActions: IConfigActionButtons[];
-  isEditMode = false;
-  taskId: number | null = null;
+  public isEditMode = false;
+
+  private _taskId: string | null = null;
 
   // Mock tasks data (in a real app, this would come from a service)
-  tasks: Task[] = [
-    {
-      id: 1,
-      title: 'Complete project proposal',
-      description: 'Write and submit the project proposal document',
-      status: 'completed',
-      createdAt: new Date(2023, 4, 15),
-    },
-    {
-      id: 2,
-      title: 'Design user interface',
-      description: 'Create wireframes and mockups for the new application',
-      status: 'in-progress',
-      createdAt: new Date(2023, 4, 18),
-    },
-  ];
+  public tasks: Task[] = [];
 
   constructor() {
     this.createInputs = CREATE_INPUTS;
@@ -55,49 +38,67 @@ export class TaskFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = this._route.snapshot.paramMap.get('id');
-    if (id) {
+    this._taskId = this._route.snapshot.paramMap.get('id');
+    if (this._taskId) {
       this.isEditMode = true;
-      this.taskId = +id;
 
-      // In a real app, you would fetch the task from your service
-      const task = this.tasks.find((t) => t.id === this.taskId);
-      if (task) {
-        this.createInputs = CREATE_INPUTS.map((input) => ({
-          ...input,
-          value: task[input.name as keyof typeof task] ?? input.value,
-        }));
-
-        this.buttonActions = CREATE_BUTTONS.map((button) => {
-          if (button.type === 'submit' && this.taskId) {
-            return {
-              ...button,
-              textToShow: 'Actualizar Tarea',
-            };
+      this._taskService.getTaskById(this._taskId).subscribe({
+        next: (task) => {
+          if (task) {
+            this.drawInputs(task);
+          } else {
+            console.warn('Task not found');
           }
-          return button;
-        });
-      }
+        },
+        error: (err) => console.error('Error founding taskk:', err),
+      });
+    } else {
+      this.createInputs = CREATE_INPUTS;
     }
   }
 
-  onSubmit($form: FormGroup): void {
+  public onSubmit($form: FormGroup): void {
     if ($form.valid) {
-      const formValue = $form.value;
+      const formValue = $form.value as Task;
 
-      if (this.isEditMode && this.taskId) {
-        // In a real app, you would call your service to update the task
-        console.log('Updating task', this.taskId, formValue);
+      if (this.isEditMode && this._taskId) {
+        this._taskService.updateTask(this._taskId, formValue).subscribe({
+          next(value) {
+            console.log('Task updated succesfully', value);
+          },
+        });
       } else {
-        // In a real app, you would call your service to create a new task
-        console.log('Creating new task', formValue);
+        const newTask: Omit<Task, 'id' | 'createdAt'> = {
+          title: formValue.title,
+          description: formValue.description,
+          status: formValue.status,
+          userId: '0F9090E3-6304-4D97-A362-03564D9C7656',
+        };
+        this._taskService.createTask(newTask);
       }
 
       this._router.navigate(['/tasks']);
     }
   }
 
-  cancel(): void {
+  public cancel(): void {
     this._router.navigate(['/tasks']);
+  }
+
+  public drawInputs(task: Task) {
+    this.createInputs = CREATE_INPUTS.map((input) => ({
+      ...input,
+      value: task[input.name as keyof typeof task] ?? input.value,
+    }));
+
+    this.buttonActions = CREATE_BUTTONS.map((button) => {
+      if (button.type === 'submit' && this._taskId) {
+        return {
+          ...button,
+          textToShow: 'Actualizar Tarea',
+        };
+      }
+      return button;
+    });
   }
 }

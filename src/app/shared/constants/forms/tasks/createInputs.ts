@@ -1,7 +1,19 @@
 import { IConfigActionButtons } from '@shared/interfaces/configActionButtons.interface';
 import { IOptionsInput } from '@shared/interfaces/optionsInput.interface';
+import { DESCRIPTION, TITLE } from '../validators/tasks/create';
 
 export const CREATE_INPUTS: IOptionsInput[] = [
+  {
+    width: '',
+    id: 'id',
+    label: '',
+    placeholder: '',
+    type: 'hidden',
+    value: '',
+    name: 'id',
+    readonly: true,
+    labelClass: 'null',
+  },
   {
     width: 'mt-3 shadow-sm space-y-px',
     id: 'title',
@@ -12,6 +24,7 @@ export const CREATE_INPUTS: IOptionsInput[] = [
     name: 'title',
     readonly: false,
     labelClass: 'null',
+    validator: TITLE
   },
   {
     width: 'mt-3 shadow-sm space-y-px',
@@ -23,6 +36,7 @@ export const CREATE_INPUTS: IOptionsInput[] = [
     name: 'description',
     readonly: false,
     labelClass: 'null',
+    validator: DESCRIPTION
   },
   {
     width: 'mt-3 shadow-sm space-y-px',

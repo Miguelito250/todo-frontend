@@ -3,26 +3,26 @@
     <h2 class="text-lg font-medium text-white">Tareas Recientes</h2>
   </div>
   <div class="divide-y divide-gray-700">
-    @for (task of recentTasks; track task.id) {
+    @for (task of recentTasks; track task.Id) {
     <div class="px-6 py-4 flex items-center">
       <div
         class="h-3 w-3 rounded-full mr-4"
         [class]="{
-          'bg-blue-500': task.status === 'pending',
-          'bg-yellow-500': task.status === 'in-progress',
-          'bg-green-500': task.status === 'completed'
+          'bg-blue-500': task.Status === 'pending',
+          'bg-yellow-500': task.Status === 'in-progress',
+          'bg-green-500': task.Status === 'completed'
         }"
       ></div>
       <div class="flex-1 min-w-0">
-        <p class="text-sm font-medium text-white truncate">{{ task.title }}</p>
-        <p class="text-sm text-gray-400 truncate">{{ task.description }}</p>
+        <p class="text-sm font-medium text-white truncate">{{ task.Title }}</p>
+        <p class="text-sm text-gray-400 truncate">{{ task.Description }}</p>
       </div>
       <div class="ml-4 flex-shrink-0">
-        <p class="text-sm text-gray-400">{{ formatDate(task.createdAt) }}</p>
+        <p class="text-sm text-gray-400">{{ formatDate(task.CreatedAt) }}</p>
       </div>
       <div class="ml-4 flex-shrink-0">
         <a
-          [routerLink]="['/tasks/edit', task.id]"
+          [routerLink]="['/tasks/edit', task.Id]"
           class="text-sm font-medium text-indigo-400 hover:text-indigo-300"
         >
           Editar

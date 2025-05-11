@@ -29,13 +29,13 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.dashboard.totalTasks = this.recentTasks.length;
     this.dashboard.pendingTasks = this.recentTasks.filter(
-      (task) => task.status === 'pending'
+      (task) => task.status === "pending"
     ).length;
     this.dashboard.inProgressTasks = this.recentTasks.filter(
-      (task) => task.status === 'in-progress'
+      (task) => task.status === "inProgress"
     ).length;
     this.dashboard.completedTasks = this.recentTasks.filter(
-      (task) => task.status === 'completed'
+      (task) => task.status === "completed"
     ).length;
   }
 }

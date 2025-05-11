@@ -29,6 +29,7 @@
       [class]="input.width"
       [formControlName]="input.name"
       [placeholder]="input.placeholder"
+      [value]="input.value"
     ></textarea>
     @for (error of getErrorMessages(input.name); track $index) {
     <small>{{ error }}</small>
@@ -55,7 +56,7 @@
       [type]="button.type"
       [class]="button.action"
       class="action"
-      [disabled]="!form.valid"
+      [disabled]="!form.valid && button.action != 'action-cancel' "
       (click)="button.action === 'action-cancel' ? cancelAction.emit() : null"
     >
       {{ button.textToShow }}

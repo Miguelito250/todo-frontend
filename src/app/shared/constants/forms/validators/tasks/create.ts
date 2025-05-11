@@ -7,7 +7,6 @@ export const TITLE: ValidatorFn[] = [
 ]
 
 export const DESCRIPTION: ValidatorFn[] = [
-    Validators.required,
     Validators.minLength(3),
     Validators.maxLength(500),
 ]

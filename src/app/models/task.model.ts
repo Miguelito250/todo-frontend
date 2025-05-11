@@ -1,7 +1,8 @@
 export interface Task {
-  id: number
+  id: string
   title: string
   description: string
-  status: "pending" | "in-progress" | "completed"
-  createdAt: Date
+  status: "pending" | "inProgress" | "completed"
+  createdAt: string
+  userId: string
 }

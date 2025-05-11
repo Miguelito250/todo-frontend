@@ -3,10 +3,12 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnChanges,
   OnInit,
   Output,
   output,
   OutputEmitterRef,
+  SimpleChanges,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -26,13 +28,12 @@ import { FormService } from '@shared/services/form/form.service';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnChanges {
   @Input() public classParent: string;
   @Input() public inputs: IOptionsInput[];
   @Input() public configActionsButtons: IConfigActionButtons[];
 
   @Output() cancelAction = new EventEmitter<void>();
-
 
   public formValues: OutputEmitterRef<FormGroup> = output<FormGroup>();
 
@@ -51,6 +52,13 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.buildForm(this.inputs);
     this.callFunctionsToObject();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['inputs'] && !changes['inputs'].firstChange) {
+      this.form = this.buildForm(this.inputs);
+      this.callFunctionsToObject();
+    }
   }
 
   private buildForm(inputs: IOptionsInput[]): FormGroup {
@@ -72,7 +80,7 @@ export class FormComponent implements OnInit {
   }
 
   public emitSubmit(): void {
-    this.formValues.emit(this.form.value);
+    this.formValues.emit(this.form);
   }
 
   private callFunctionsToObject() {
