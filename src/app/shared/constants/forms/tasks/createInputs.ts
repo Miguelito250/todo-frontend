@@ -57,7 +57,7 @@ export const CREATE_INPUTS: IOptionsInput[] = [
       {
         default: false,
         valueToShow: 'En Progreso',
-        tagValue: 'Inprogress',
+        tagValue: 'inProgress',
         disabled: false,
       },
       {
