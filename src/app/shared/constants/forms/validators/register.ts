@@ -1,8 +1,9 @@
 import { ValidatorFn, Validators } from '@angular/forms';
-import { matchPassword } from 'app/utils/functions/generalFunctions';
+import { matchPassword, noWhitespaceValidator } from 'app/utils/functions/generalFunctions';
 
 export const FULL_NAME: ValidatorFn[] = [
   Validators.required,
+  noWhitespaceValidator(),
   Validators.maxLength(30),
   Validators.minLength(2),
 ];

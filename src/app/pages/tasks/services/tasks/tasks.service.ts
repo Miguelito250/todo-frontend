@@ -3,12 +3,15 @@ import { Task } from '@models/task.model';
 import { RequestService } from '@core/services/request/request.service';
 import { environment } from 'environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TasksService {
   private readonly _requestService: RequestService = inject(RequestService);
+  private readonly _authService: AuthService = inject(AuthService);
+
   private _tasks$ = new BehaviorSubject<Task[]>([]);
 
   tasks$ = this._tasks$.asObservable();
@@ -32,7 +35,7 @@ export class TasksService {
     this._requestService
       .request<Task[]>({
         method: 'GET',
-        url: `${environment.apiUrl}tasks`,
+        url: `${environment.apiUrl}tasks/tasksUser/${this._authService.userId}`,
       })
       .subscribe({
         next: (tasks) => this._tasks$.next(tasks),

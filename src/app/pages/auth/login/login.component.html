@@ -4,7 +4,7 @@
   <div class="max-w-md w-full space-y-8">
     <div>
       <h2 class="mt-6 text-center text-3xl font-extrabold text-white">
-        Inicia Sesión en tu Cuenta 
+        Inicia Sesión en tu Cuenta
       </h2>
       <p class="mt-2 text-center text-sm text-gray-400">
         O
@@ -17,6 +17,19 @@
       </p>
     </div>
 
-    <app-form class="mt-8 space-y-6" [configActionsButtons]="buttonsActions" [inputs]="loginInputs" (formValues)="onSubmit($event )"></app-form>
+    @if(errorMessage){
+    <div
+      class="mt-4 p-4 bg-red-100 text-red-800 border-l-4 border-red-500 rounded-md"
+    >
+      <strong>{{ errorMessage }}</strong>
+    </div>
+    }
+
+    <app-form
+      class="mt-8 space-y-6"
+      [configActionsButtons]="buttonsActions"
+      [inputs]="loginInputs"
+      (formValues)="onSubmit($event)"
+    ></app-form>
   </div>
 </div>

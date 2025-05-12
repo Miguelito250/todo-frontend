@@ -22,7 +22,8 @@ export class FormService {
         `Debe de ser mayor de ${error.requiredMinValue} años.`,
       maxDifference: (error) =>
         `No puede ser mayor a ${error.requiredMaxValue} `,
-      passwordMismatch: (error) => `Las contraseñas deben de coincidir.`
+      passwordMismatch: (error) => `Las contraseñas deben de coincidir.`,
+      whitespace: (error) => `No puede ser solo espacios vacios.`
     };
   }
 

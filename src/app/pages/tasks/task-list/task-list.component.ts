@@ -47,11 +47,11 @@ export class TaskListComponent implements OnInit, OnDestroy {
   formatStatus(status: string): string {
     switch (status) {
       case 'pending':
-        return 'Pending';
+        return 'Pendiente';
       case 'inProgress':
-        return 'In Progress';
+        return 'En Progeso';
       case 'completed':
-        return 'Completed';
+        return 'Completada';
       default:
         return status;
     }

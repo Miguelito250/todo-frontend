@@ -26,6 +26,8 @@ export class LoginComponent {
   private readonly _authService: AuthService = inject(AuthService);
   private readonly _router: Router = inject(Router);
 
+  public errorMessage: string = '';
+
   public loginInputs: IOptionsInput[];
   public buttonsActions: IConfigActionButtons[];
 
@@ -44,6 +46,7 @@ export class LoginComponent {
 
       this._authService.login(dataLogin).subscribe({
         next: () => this._router.navigate(['/dashboard']),
+        error: () => (this.errorMessage = 'Credenciales incorrectas'),
       });
     }
   }
