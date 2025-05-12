@@ -1,59 +1,63 @@
-# ToDo
+# 📝 Todo Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
+Este proyecto es una aplicación web construida con **Angular 19** y **TailwindCSS**, que permite gestionar tareas (To-Do) con funcionalidades de autenticación y filtrado por estado. Es el cliente del sistema de gestión de tareas.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Tecnologías utilizadas
+
+- Angular 19
+- TypeScript
+- TailwindCSS
+- RxJS
+- Angular Forms
+- Angular Standalone Components
+
+---
+
+## 📁 Arquitectura utilizada
+
+El proyecto implementa una **arquitectura modular basada en componentes y servicios**, siguiendo buenas prácticas recomendadas por Angular. La estructura favorece la escalabilidad, mantenimiento y reutilización del código.
+
+### 1. Presentación (UI)
+
+- Carpeta `components`: contiene elementos reutilizables (formularios, botones, listas).
+- Carpeta `pages`: contiene vistas completas de la app (como "Inicio", "Tareas", etc.).
+
+### 2. Servicios
+
+- Carpeta `core/services`: contiene la lógica de negocio y la comunicación con la API.
+- Uso de inyección de dependencias para desacoplar lógica y facilitar pruebas.
+
+### 3. Modelos y utilidades
+
+- Carpeta `core/models` y otros archivos en `core`: definen las entidades (`Task`) y utilidades como filtros o enums.
+- Permiten un tipado fuerte y mayor claridad en los datos.
+
+### 4. Configuración global (Core)
+
+- Carpeta `core`: centraliza elementos compartidos (servicios, modelos, lógica común).
+- Mejora la organización y reduce la duplicación de código.
+
+---
+
+## 📦 Instalación y ejecución del proyecto
+
+Sigue los pasos a continuación para ejecutar la aplicación localmente:
 
 ```bash
+# 1. Clonar el repositorio
+git clone https://github.com/Miguelito250/todo-frontend.git
+cd todo-frontend
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Ejecutar la aplicación en modo desarrollo
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[! NOTE]
+> Importantea tener en cuenta
+> 
+> En la carpeta de environments asegurese de que la ruta de la API esta apuntando al puerto 7287.
