@@ -26,9 +26,8 @@ export class TaskListComponent implements OnInit, OnDestroy {
       this.filterTasks();
     });
 
-    this._taskService.loadTasks();
-
     this._subscriptions.add(initalTasks);
+    this._taskService.loadTasks();
   }
 
   ngOnDestroy(): void {
@@ -37,10 +36,10 @@ export class TaskListComponent implements OnInit, OnDestroy {
 
   filterTasks(): void {
     if (this.statusFilter === 'all') {
-      this.filteredTasks = [...this.tasks];
+      this.filteredTasks = this.tasks.filter((task) => task != null);
     } else {
       this.filteredTasks = this.tasks.filter(
-        (task) => task.status === this.statusFilter
+        (task) => task && task.status === this.statusFilter
       );
     }
   }

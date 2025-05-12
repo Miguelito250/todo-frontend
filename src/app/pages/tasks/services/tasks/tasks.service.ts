@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Task } from '@models/task.model';
-import { RequestService } from '@shared/services/request/request.service';
+import { RequestService } from '@core/services/request/request.service';
 import { environment } from 'environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 

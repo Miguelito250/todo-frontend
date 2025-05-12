@@ -5,12 +5,12 @@ import { CONFIRM_PASSWORD, EMAIL, FULL_NAME, PASSWORD } from './validators/regis
 export const REGISTER_INPUTS: IOptionsInput[] = [
   {
     width: 'mt-3 shadow-sm space-y-px',
-    id: 'fullname',
+    id: 'fullName',
     label: 'Nombre Completo',
     placeholder: 'Nombre completo',
     type: 'text',
     value: '',
-    name: 'fullname',
+    name: 'fullName',
     readonly: false,
     validator: FULL_NAME
   },

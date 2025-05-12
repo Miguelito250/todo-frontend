@@ -11,6 +11,7 @@ import {
 } from '@shared/constants/forms/tasks/createInputs';
 import { IConfigActionButtons } from '@shared/interfaces/configActionButtons.interface';
 import { TasksService } from '../services/tasks/tasks.service';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-task-form',
@@ -19,9 +20,10 @@ import { TasksService } from '../services/tasks/tasks.service';
   templateUrl: './task-form-component.html',
 })
 export class TaskFormComponent implements OnInit {
-  private _taskService = inject(TasksService);
-  private _router = inject(Router);
-  private _route = inject(ActivatedRoute);
+  private readonly _authService = inject(AuthService)
+  private readonly _taskService = inject(TasksService);
+  private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
 
   public createInputs: IOptionsInput[];
   public buttonActions: IConfigActionButtons[];
@@ -72,12 +74,12 @@ export class TaskFormComponent implements OnInit {
           title: formValue.title,
           description: formValue.description,
           status: formValue.status,
-          userId: '0F9090E3-6304-4D97-A362-03564D9C7656',
+          userId: this._authService.userId ?? ""
         };
         this._taskService.createTask(newTask);
       }
 
-      this._router.navigate(['/tasks']);
+      this._router.navigate(['/dashboard']);
     }
   }
 

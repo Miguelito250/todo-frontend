@@ -5,6 +5,8 @@
   "compilerOptions": {
     "baseUrl": "src/",
     "paths": {
+      "@core/services/*": ["./app/core/services/*"],
+      "@core/guards/*": ["./app/core/guards/*"],
       "@shared/constants/*": ["./app/shared/constants/*"],
       "@shared/interfaces/*": ["./app/shared/interfaces/*"],
       "@shared/components/*": ["./app/shared/components/*"],

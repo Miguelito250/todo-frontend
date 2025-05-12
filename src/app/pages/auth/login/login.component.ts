@@ -6,10 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { LOGIN_BUTTONS, LOGIN_INPUTS } from '@shared/constants/forms/loginInputs';
+import {
+  LOGIN_BUTTONS,
+  LOGIN_INPUTS,
+} from '@shared/constants/forms/loginInputs';
 import { IOptionsInput } from '@shared/interfaces/optionsInput.interface';
-import { FormComponent } from "../../../shared/components/form/form.component";
+import { FormComponent } from '../../../shared/components/form/form.component';
 import { IConfigActionButtons } from '@shared/interfaces/configActionButtons.interface';
+import { AuthService } from '../../../core/services/auth/auth.service';
+import { Login } from '@models/login.model';
 
 @Component({
   selector: 'app-login',
@@ -18,18 +23,28 @@ import { IConfigActionButtons } from '@shared/interfaces/configActionButtons.int
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  private _fb = inject(FormBuilder);
-  private _router = inject(Router);
+  private readonly _authService: AuthService = inject(AuthService);
+  private readonly _router: Router = inject(Router);
 
   public loginInputs: IOptionsInput[];
-  public buttonsActions: IConfigActionButtons[]
+  public buttonsActions: IConfigActionButtons[];
 
   constructor() {
     this.loginInputs = LOGIN_INPUTS;
-    this.buttonsActions = LOGIN_BUTTONS
+    this.buttonsActions = LOGIN_BUTTONS;
   }
 
-  onSubmit($form: FormGroup) {
-    // Logic to uses services when request api
+  onSubmit(form: FormGroup) {
+    if (form.valid) {
+      const formValue = form.value;
+      const dataLogin: Login = {
+        email: formValue.email,
+        password: formValue.password,
+      };
+
+      this._authService.login(dataLogin).subscribe({
+        next: () => this._router.navigate(['/dashboard']),
+      });
+    }
   }
 }

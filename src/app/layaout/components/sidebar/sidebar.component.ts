@@ -1,7 +1,8 @@
-import { Component, Input, output, WritableSignal } from '@angular/core';
+import { Component, inject, Input, output, WritableSignal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { IModules } from './interfaces/modules.interface';
+import { AuthService } from '@core/services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,8 @@ import { IModules } from './interfaces/modules.interface';
   templateUrl: './sidebar.component.html',
 })
 export class SidebarComponent {
+  private readonly _authService: AuthService = inject(AuthService);
+
   @Input() isVisible!: () => boolean;
   @Input() toggle!: () => void;
 
@@ -28,5 +31,9 @@ export class SidebarComponent {
         textShow: 'Tareas',
       },
     ];
+  }
+
+  public logout(){
+    this._authService.logout();
   }
 }
