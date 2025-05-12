@@ -8,6 +8,10 @@ import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 
+/**
+ * Este interceptor agrega a cada peticion que salga el header con el token
+ */
+
 export const authInterceptorFn: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn

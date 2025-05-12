@@ -6,6 +6,12 @@ import { catchError, map, Observable, of } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
+
+/**
+ * La class AuthGuard es la encargada de hacer una petición al backend
+ * para saber si el token que tiene en el header es valido o no
+ */
+
 export class AuthGuard implements CanActivate {
   private authService = inject(AuthService);
   private _router = inject(Router);

@@ -9,6 +9,13 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
+
+/**
+ * El servicio de Auth es el encargado de hacer las peticiones con la información necesaria 
+ * para solicitar el recurso a la API en .NET, su gran mayoria retornan observarbles quee en caso de que fallen ¿
+ * los captura el cathError y lanza una excepcion
+ */
+
 export class AuthService {
   private readonly _requestService: RequestService = inject(RequestService);
 
@@ -58,7 +65,7 @@ export class AuthService {
   validateToken() {
     return this._requestService.request<any>({
       method: 'GET',
-      url: `${environment.apiUrl}auth`, // Cambia al endpoint real que tengas
+      url: `${environment.apiUrl}auth`,
       headers: {
         Authorization: `Bearer ${this.getAccessToken()}`,
       },
@@ -78,8 +85,7 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.removeItem('idUser');
-    localStorage.removeItem('FullName');
+    this.clearUser()
     localStorage.removeItem('accessToken');
   }
 

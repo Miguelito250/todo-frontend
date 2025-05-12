@@ -28,6 +28,8 @@ export class LoginComponent {
 
   public errorMessage: string = '';
 
+  // Para mas información sobre los inputs dinamicos vaya a la documentacion del app-form
+
   public loginInputs: IOptionsInput[];
   public buttonsActions: IConfigActionButtons[];
 
@@ -39,6 +41,8 @@ export class LoginComponent {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       const formValue = form.value;
+
+      // Creamos un nuevo objeto para poder pasar a la api
       const dataLogin: Login = {
         email: formValue.email,
         password: formValue.password,

@@ -8,9 +8,10 @@ import { AuthService } from '@core/services/auth/auth.service';
   imports: [CommonModule],
   templateUrl: './navbar.component.html',
 })
+
 export class NavbarComponent implements OnInit {
   private readonly _authService: AuthService = inject(AuthService);
-  @Input() toggleSidebar!: () => void;
+  @Input() toggleSidebar!: () => void; // Variable para indicar que el sidebar se cerro o se abrio
 
   public fullname: string;
 

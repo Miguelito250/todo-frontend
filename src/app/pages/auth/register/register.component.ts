@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { type FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { FormComponent } from '../../../shared/components/form/form.component';
 import { IOptionsInput } from '@shared/interfaces/optionsInput.interface';
 import {
@@ -34,13 +34,17 @@ export class RegisterComponent {
   onSubmit(form: FormGroup) {
     if (form.valid) {
       const formValue = form.value;
+
+      // Creamos un nuevo objeto para no pasar con el ConfirmPassword
       const data: Register = {
         fullName: formValue.fullName,
         email: formValue.email,
         passwordHash: formValue.password,
       };
+
       this.errorMessage = '';
       this.successMessage = '';
+
       this._authService.register(data).subscribe({
         next: () => {
           this.successMessage = '¡Registro exitoso!';
@@ -53,6 +57,4 @@ export class RegisterComponent {
       });
     }
   }
-
-  redirect() {}
 }

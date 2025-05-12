@@ -45,6 +45,10 @@ export class DashboardComponent implements OnInit {
     this._taskService.loadTasks();
   }
 
+  /**
+   * makeSummary es la encargada de organizar los valores del dashboard
+   * asi como el total de tareas, tareas completadas y pendientes 
+   */
   makeSummary() {
     this.dashboard.totalTasks = this.recentTasks.length;
     this.dashboard.pendingTasks = this.recentTasks.filter(

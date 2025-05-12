@@ -25,20 +25,23 @@ export class TaskFormComponent implements OnInit {
   private readonly _router = inject(Router);
   private readonly _route = inject(ActivatedRoute);
 
+  // Para entender el los inputs dinamicos porfavor lea sobre la documentacion del app-form
   public createInputs: IOptionsInput[];
   public buttonActions: IConfigActionButtons[];
-  public isEditMode = false;
 
   private _taskId: string | null = null;
-
-  // Mock tasks data (in a real app, this would come from a service)
   public tasks: Task[] = [];
+  public isEditMode = false;
 
   constructor() {
     this.createInputs = CREATE_INPUTS;
     this.buttonActions = CREATE_BUTTONS;
   }
 
+  /**
+   * Si existe el id en el parametro es que lo que se va a realizar a la tarea es editarla
+   * entonces se solicita toda la informaciòn de la tarea para poder mostrarla en pantalla
+   */
   ngOnInit(): void {
     this._taskId = this._route.snapshot.paramMap.get('id');
     if (this._taskId) {
@@ -70,6 +73,7 @@ export class TaskFormComponent implements OnInit {
           },
         });
       } else {
+        // Se crea  nuevo objeto para poder crearlo debido a que con el id no permite crear el objeto en la API
         const newTask: Omit<Task, 'id' | 'createdAt'> = {
           title: formValue.title,
           description: formValue.description,
@@ -87,6 +91,10 @@ export class TaskFormComponent implements OnInit {
     this._router.navigate(['/tasks']);
   }
 
+/**
+ * Esta funcion hace parte del componente app-fom y lo que hace es cuando se va a editar poder insertar en 
+ * al momento de editar la tarea
+ */
   public drawInputs(task: Task) {
     this.createInputs = CREATE_INPUTS.map((input) => ({
       ...input,

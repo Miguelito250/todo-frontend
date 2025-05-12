@@ -7,4 +7,9 @@ import { RouterOutlet } from '@angular/router';
   imports: [RouterOutlet],
   template: `<router-outlet />`,
 })
+
+/**
+ * El authLayaout es el encargado de cambiar entre las vistas de Login y register
+ */
+
 export class AuthLayaoutComponent {}

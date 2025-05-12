@@ -5,6 +5,10 @@ import { environment } from 'environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from '@core/services/auth/auth.service';
 
+/**
+ * La clase task Service es la encargada de gestionar todas las peticiones para el modelo de Task ç
+ * hacia la API de .NET
+ */
 @Injectable({
   providedIn: 'root',
 })
